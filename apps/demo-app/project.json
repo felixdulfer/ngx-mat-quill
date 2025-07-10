@@ -3,24 +3,24 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/ngx-mat-quill/src",
+  "sourceRoot": "apps/demo-app/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular/build:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/ngx-mat-quill",
-        "browser": "apps/ngx-mat-quill/src/main.ts",
+        "outputPath": "dist/apps/demo-app",
+        "browser": "apps/demo-app/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/ngx-mat-quill/tsconfig.app.json",
+        "tsConfig": "apps/demo-app/tsconfig.app.json",
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/ngx-mat-quill/public"
+            "input": "apps/demo-app/public"
           }
         ],
-        "styles": ["apps/ngx-mat-quill/src/styles.css"]
+        "styles": ["apps/demo-app/src/styles.css"]
       },
       "configurations": {
         "production": {
@@ -72,7 +72,7 @@
       "executor": "@nx/vite:test",
       "outputs": ["{options.reportsDirectory}"],
       "options": {
-        "reportsDirectory": "../../coverage/apps/ngx-mat-quill"
+        "reportsDirectory": "../../coverage/apps/demo-app"
       }
     },
     "serve-static": {
@@ -81,7 +81,7 @@
       "options": {
         "buildTarget": "ngx-mat-quill:build",
         "port": 4200,
-        "staticFilePath": "dist/apps/ngx-mat-quill/browser",
+        "staticFilePath": "dist/apps/demo-app/browser",
         "spa": true
       }
     }
