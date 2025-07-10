@@ -1,9 +1,21 @@
-import { Component, Input, OnDestroy, forwardRef, inject } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnDestroy,
+  forwardRef,
+  HostBinding,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { Subject } from 'rxjs';
-import { QuillModule } from 'ngx-quill';
+import { QuillModule, QuillEditorComponent } from 'ngx-quill';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { ElementRef } from '@angular/core';
+
+let nextUniqueId = 0;
 
 @Component({
   selector: 'lib-mat-quill-form-field-control',
@@ -11,6 +23,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
   imports: [QuillModule],
   template: `
     <quill-editor
+      #quill
       [placeholder]="placeholder"
       [readOnly]="disabled"
       [required]="required"
@@ -36,18 +49,49 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 export class MatQuillFormFieldControl
   implements MatFormFieldControl<string>, ControlValueAccessor, OnDestroy
 {
-  static nextId = 0;
+  static ngAcceptInputType_disabled: boolean | string | null | undefined;
+  static ngAcceptInputType_required: boolean | string | null | undefined;
+
+  @ViewChild('quill', { static: false }) quillEditor?: QuillEditorComponent;
+
   stateChanges = new Subject<void>();
   focused = false;
   touched = false;
   controlType = 'mat-quill-editor';
-  id = `mat-quill-editor-${MatQuillFormFieldControl.nextId++}`;
+  @HostBinding() id = `mat-quill-editor-${nextUniqueId++}`;
 
-  @Input() placeholder = '';
-  @Input() required = false;
-  @Input() disabled = false;
+  @Input()
+  get placeholder(): string {
+    return this._placeholder;
+  }
+  set placeholder(value: string) {
+    this._placeholder = value;
+    this.stateChanges.next();
+  }
+  private _placeholder = '';
+
+  @Input()
+  get required(): boolean {
+    return this._required;
+  }
+  set required(value: boolean) {
+    this._required = coerceBooleanProperty(value);
+    this.stateChanges.next();
+  }
+  private _required = false;
+
+  @Input()
+  get disabled(): boolean {
+    return this._disabled;
+  }
+  set disabled(value: boolean) {
+    this._disabled = coerceBooleanProperty(value);
+    this.stateChanges.next();
+  }
+  private _disabled = false;
 
   private _value = '';
+  @Input()
   get value() {
     return this._value;
   }
@@ -62,17 +106,29 @@ export class MatQuillFormFieldControl
   }
 
   get errorState() {
-    return false; // implement validation if needed
+    return !!(
+      this.ngControl &&
+      this.ngControl.invalid &&
+      (this.ngControl.touched || this.ngControl.dirty)
+    );
   }
 
+  get shouldLabelFloat() {
+    return this.focused || !this.empty;
+  }
+
+  @HostBinding('attr.aria-describedby') describedBy = '';
+
   onChange = (_: any) => {
-    /* no-op */
+    this.stateChanges.next();
   };
   onTouched = () => {
-    /* no-op */
+    this.touched = true;
+    this.stateChanges.next();
   };
 
   ngControl = inject(NgControl, { optional: true, self: true });
+  _elementRef = inject(ElementRef);
 
   constructor() {
     if (this.ngControl != null) {
@@ -83,7 +139,6 @@ export class MatQuillFormFieldControl
   writeValue(val: string): void {
     this._value = val;
     this.stateChanges.next();
-    // Setting value programmatically is not directly supported by ngx-quill, but can be done via ViewChild if needed
   }
   registerOnChange(fn: any): void {
     this.onChange = fn;
@@ -97,9 +152,7 @@ export class MatQuillFormFieldControl
   }
 
   onContentChanged(event: any) {
-    this._value = event.html;
-    this.onChange(this._value);
-    this.stateChanges.next();
+    this.value = event.html;
   }
   onFocus() {
     this.focused = true;
@@ -112,12 +165,22 @@ export class MatQuillFormFieldControl
     this.stateChanges.next();
   }
 
-  shouldLabelFloat = true;
   setDescribedByIds(ids: string[]): void {
-    // No-op for now
+    this.describedBy = ids.join(' ');
   }
   onContainerClick(event: MouseEvent): void {
-    // Optionally focus the editor
+    // Focus the editor when the container is clicked
+    if (this.quillEditor && this.quillEditor['editorElem']) {
+      (this.quillEditor['editorElem'] as HTMLElement).focus();
+    }
+  }
+
+  focus() {
+    this.focused = true;
+    this.stateChanges.next();
+    if (this.quillEditor && this.quillEditor['editorElem']) {
+      (this.quillEditor['editorElem'] as HTMLElement).focus();
+    }
   }
 
   ngOnDestroy() {
