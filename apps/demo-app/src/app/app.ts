@@ -1,9 +1,16 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NxWelcome } from './nx-welcome';
+import {
+  MatQuillEditorComponent,
+  MatQuillInlineEditorComponent,
+} from '@felixdulfer/ngx-mat-quill';
 
 @Component({
-  imports: [NxWelcome, RouterModule],
+  imports: [
+    RouterModule,
+    MatQuillEditorComponent,
+    MatQuillInlineEditorComponent,
+  ],
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.css',

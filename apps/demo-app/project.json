@@ -51,10 +51,10 @@
       "executor": "@angular/build:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "ngx-mat-quill:build:production"
+          "buildTarget": "demo-app:build:production"
         },
         "development": {
-          "buildTarget": "ngx-mat-quill:build:development"
+          "buildTarget": "demo-app:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -62,7 +62,7 @@
     "extract-i18n": {
       "executor": "@angular/build:extract-i18n",
       "options": {
-        "buildTarget": "ngx-mat-quill:build"
+        "buildTarget": "demo-app:build"
       }
     },
     "lint": {
@@ -79,7 +79,7 @@
       "continuous": true,
       "executor": "@nx/web:file-server",
       "options": {
-        "buildTarget": "ngx-mat-quill:build",
+        "buildTarget": "demo-app:build",
         "port": 4200,
         "staticFilePath": "dist/apps/demo-app/browser",
         "spa": true
