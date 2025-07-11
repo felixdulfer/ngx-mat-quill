@@ -32,7 +32,7 @@ let nextUniqueId = 0;
       (onBlur)="onBlur()"
       (onFocus)="onFocus()"
       class="mat-quill-editor"
-    ></quill-editor>
+    />
   `,
   providers: [
     {
@@ -121,6 +121,7 @@ export class NgxMatQuill
 
   @HostBinding('attr.aria-describedby') describedBy = '';
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
   onChange = (_: any) => {
     this.stateChanges.next();
   };
@@ -142,9 +143,11 @@ export class NgxMatQuill
     this._value = val;
     this.stateChanges.next();
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
@@ -170,6 +173,7 @@ export class NgxMatQuill
   setDescribedByIds(ids: string[]): void {
     this.describedBy = ids.join(' ');
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onContainerClick(_event: MouseEvent): void {
     // Focus the editor when the container is clicked
     if (this.quillEditor && this.quillEditor['editorElem']) {
