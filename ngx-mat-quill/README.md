@@ -33,7 +33,7 @@ Or, import them in your global styles file:
 
 ```html
 <mat-form-field appearance="outline">
-  <lib-mat-quill-form-field-control placeholder="Type here..." [required]="true"></lib-mat-quill-form-field-control>
+  <ngx-mat-quill-form-field-control placeholder="Type here..." [required]="true" />
   <mat-label>Rich Text</mat-label>
 </mat-form-field>
 ```
@@ -41,7 +41,7 @@ Or, import them in your global styles file:
 You can also use the fixed-toolbar and inline-toolbar editors:
 
 ```html
-<lib-mat-quill-editor></lib-mat-quill-editor> <lib-mat-quill-inline-editor></lib-mat-quill-inline-editor>
+<lib-mat-quill-editor /> <lib-mat-quill-inline-editor />
 ```
 
 ## Running unit tests

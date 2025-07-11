@@ -26,7 +26,7 @@ export default [
         'error',
         {
           type: 'attribute',
-          prefix: 'lib',
+          prefix: 'ngx-mat-quill',
           style: 'camelCase',
         },
       ],
@@ -34,9 +34,13 @@ export default [
         'error',
         {
           type: 'element',
-          prefix: 'lib',
+          prefix: 'ngx-mat-quill',
           style: 'kebab-case',
         },
+      ],
+      'no-unused-vars': [
+        'error',
+        { 'argsIgnorePattern': '^_' }
       ],
     },
   },

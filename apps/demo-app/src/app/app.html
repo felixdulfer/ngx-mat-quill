@@ -1,17 +1,15 @@
-<!-- Only use lib-mat-quill-form-field-control inside mat-form-field to avoid mat-form-field errors -->
+<!-- Only use ngx-mat-quill-form-field-control inside mat-form-field to avoid mat-form-field errors -->
 <h2>Material Quill Editor (MatFormFieldControl)</h2>
 <mat-form-field appearance="outline" class="mat-quill-form-field">
-  <lib-mat-quill-form-field-control
+  <ngx-mat-quill-form-field-control
     placeholder="Type here..."
     [required]="true"
-  ></lib-mat-quill-form-field-control>
+  />
   <mat-label>Rich Text</mat-label>
 </mat-form-field>
 
 <h2>Material Quill Editor (Fixed Toolbar)</h2>
-<lib-mat-quill-editor></lib-mat-quill-editor>
+<lib-mat-quill-editor />
 
 <h2>Material Quill Inline Editor (Bubble Toolbar)</h2>
-<lib-mat-quill-inline-editor></lib-mat-quill-inline-editor>
-
-<router-outlet></router-outlet>
+<lib-mat-quill-inline-editor />

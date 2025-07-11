@@ -18,7 +18,7 @@ import { ElementRef } from '@angular/core';
 let nextUniqueId = 0;
 
 @Component({
-  selector: 'lib-mat-quill-form-field-control',
+  selector: 'ngx-mat-quill-form-field-control',
   standalone: true,
   imports: [QuillModule],
   template: `
