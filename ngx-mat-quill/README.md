@@ -1,6 +1,6 @@
 # ngx-mat-quill
 
-This library provides Angular Material-themed Quill editor components for Angular projects.
+This library provides an Angular Material-themed Quill editor component for Angular projects.
 
 ## Installation
 
@@ -33,15 +33,14 @@ Or, import them in your global styles file:
 
 ```html
 <mat-form-field appearance="outline">
-  <ngx-mat-quill-form-field-control placeholder="Type here..." [required]="true" />
-  <mat-label>Rich Text</mat-label>
+  <ngx-mat-quill placeholder="Type here..." [required]="true" theme="snow"></ngx-mat-quill>
+  <mat-label>Rich Text (Snow Theme)</mat-label>
 </mat-form-field>
-```
 
-You can also use the fixed-toolbar and inline-toolbar editors:
-
-```html
-<lib-mat-quill-editor /> <lib-mat-quill-inline-editor />
+<mat-form-field appearance="outline">
+  <ngx-mat-quill placeholder="Type here..." [required]="true" theme="bubble"></ngx-mat-quill>
+  <mat-label>Rich Text (Bubble Theme)</mat-label>
+</mat-form-field>
 ```
 
 ## Running unit tests

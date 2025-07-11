@@ -8,7 +8,6 @@ import { MatLabel } from '@angular/material/form-field';
   imports: [RouterModule, MatFormFieldModule, MatLabel, NgxMatQuill],
   selector: 'app-root',
   templateUrl: './app.html',
-  styleUrl: './app.css',
 })
 export class App {
   protected title = 'ngx-mat-quill';

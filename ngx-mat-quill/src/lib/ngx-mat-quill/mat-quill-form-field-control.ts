@@ -18,7 +18,7 @@ import { ElementRef } from '@angular/core';
 let nextUniqueId = 0;
 
 @Component({
-  selector: 'ngx-mat-quill-form-field-control',
+  selector: 'ngx-mat-quill',
   standalone: true,
   imports: [QuillModule],
   template: `
@@ -27,26 +27,26 @@ let nextUniqueId = 0;
       [placeholder]="placeholder"
       [readOnly]="disabled"
       [required]="required"
+      [theme]="theme"
       (onContentChanged)="onContentChanged($event)"
       (onBlur)="onBlur()"
       (onFocus)="onFocus()"
       class="mat-quill-editor"
-    />
+    ></quill-editor>
   `,
   providers: [
     {
       provide: MatFormFieldControl,
-      useExisting: forwardRef(() => MatQuillFormFieldControl),
+      useExisting: forwardRef(() => NgxMatQuill),
     },
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => MatQuillFormFieldControl),
+      useExisting: forwardRef(() => NgxMatQuill),
       multi: true,
     },
   ],
-  styleUrls: ['./ngx-mat-quill.css'],
 })
-export class MatQuillFormFieldControl
+export class NgxMatQuill
   implements MatFormFieldControl<string>, ControlValueAccessor, OnDestroy
 {
   static ngAcceptInputType_disabled: boolean | string | null | undefined;
@@ -59,6 +59,8 @@ export class MatQuillFormFieldControl
   touched = false;
   controlType = 'mat-quill-editor';
   @HostBinding() id = `mat-quill-editor-${nextUniqueId++}`;
+
+  @Input() theme = 'snow';
 
   @Input()
   get placeholder(): string {
@@ -168,7 +170,7 @@ export class MatQuillFormFieldControl
   setDescribedByIds(ids: string[]): void {
     this.describedBy = ids.join(' ');
   }
-  onContainerClick(event: MouseEvent): void {
+  onContainerClick(_event: MouseEvent): void {
     // Focus the editor when the container is clicked
     if (this.quillEditor && this.quillEditor['editorElem']) {
       (this.quillEditor['editorElem'] as HTMLElement).focus();
