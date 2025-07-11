@@ -22,9 +22,16 @@ let nextUniqueId = 0;
   standalone: true,
   imports: [QuillModule],
   template: `
-    < #quill [placeholder]="placeholder" [readOnly]="disabled"
-    [required]="required" (onContentChanged)="onContentChanged($event)"
-    (onBlur)="onBlur()" (onFocus)="onFocus()" class="mat-quill-editor" />
+    <quill-editor
+      #quill
+      [placeholder]="placeholder"
+      [readOnly]="disabled"
+      [required]="required"
+      (onContentChanged)="onContentChanged($event)"
+      (onBlur)="onBlur()"
+      (onFocus)="onFocus()"
+      class="mat-quill-editor"
+    />
   `,
   providers: [
     {
