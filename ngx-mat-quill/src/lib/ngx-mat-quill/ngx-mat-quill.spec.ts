@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NgxMatQuill } from './ngx-mat-quill';
+import { MatQuillEditorComponent } from './ngx-mat-quill';
 
-describe('NgxMatQuill', () => {
-  let component: NgxMatQuill;
-  let fixture: ComponentFixture<NgxMatQuill>;
+describe('MatQuillEditorComponent', () => {
+  let component: MatQuillEditorComponent;
+  let fixture: ComponentFixture<MatQuillEditorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NgxMatQuill],
+      imports: [MatQuillEditorComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(NgxMatQuill);
+    fixture = TestBed.createComponent(MatQuillEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
