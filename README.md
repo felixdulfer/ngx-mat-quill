@@ -64,7 +64,6 @@ For more information on using the Angular CLI, including detailed command refere
 
 - [ ] Validation in quill
 - [ ] JSON output
-- [ ] Disable tab in quill
 - [ ] Set normal fonts
 - [ ] Use Material icons
 - [ ] Deploy to npm
@@ -74,3 +73,7 @@ For more information on using the Angular CLI, including detailed command refere
 - [ ] E2e tests
 - [ ] Increase coverage
 - [ ] A11y improvements
+
+- [ ] Demo where quill is used as a form control
+  - [ ] Navigate from/to other fields using tab
+  - [ ] Prevent focus on toolbar (tab over)
