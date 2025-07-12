@@ -1,0 +1,20 @@
+<!-- Basic Quill Editor (outside mat-form-field) -->
+<h2>Basic Quill Editor (Snow Theme)</h2>
+<ngx-mat-quill placeholder="Type here..." theme="snow" />
+
+<h2>Basic Quill Editor (Bubble Theme)</h2>
+<ngx-mat-quill placeholder="Type here..." theme="bubble" />
+
+<!-- Reactive Form Example (outside mat-form-field) -->
+<h2>Reactive Form Example</h2>
+<form [formGroup]="form">
+  <ngx-mat-quill
+    formControlName="editor"
+    placeholder="Type here..."
+    theme="snow"
+  />
+</form>
+<div>
+  <strong>Form Value:</strong>
+  <pre>{{ form.value | json }}</pre>
+</div>
