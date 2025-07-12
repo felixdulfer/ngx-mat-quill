@@ -5,14 +5,39 @@
 <h2>Basic Quill Editor (Bubble Theme)</h2>
 <ngx-mat-quill placeholder="Type here..." theme="bubble" />
 
-<!-- Reactive Form Example (outside mat-form-field) -->
-<h2>Reactive Form Example</h2>
-<form [formGroup]="form">
+<!-- Material Form Field Integration -->
+<h2>Material Quill Editor (Snow Theme)</h2>
+<mat-form-field appearance="outline" class="mat-quill-form-field">
   <ngx-mat-quill
-    formControlName="editor"
+    ngxMatQuillFormFieldControl
     placeholder="Type here..."
     theme="snow"
   />
+  <mat-label>Rich Text (Snow Theme)</mat-label>
+</mat-form-field>
+
+<h2>Material Quill Editor (Bubble Theme)</h2>
+<mat-form-field appearance="outline" class="mat-quill-form-field">
+  <ngx-mat-quill
+    ngxMatQuillFormFieldControl
+    placeholder="Type here..."
+    theme="bubble"
+  />
+  <mat-label>Rich Text (Bubble Theme)</mat-label>
+</mat-form-field>
+
+<!-- Reactive Form Example with Material -->
+<h2>Reactive Form Example (with Material)</h2>
+<form [formGroup]="form">
+  <mat-form-field appearance="outline" class="mat-quill-form-field">
+    <ngx-mat-quill
+      ngxMatQuillFormFieldControl
+      formControlName="editor"
+      placeholder="Type here..."
+      theme="snow"
+    />
+    <mat-label>Reactive Rich Text</mat-label>
+  </mat-form-field>
 </form>
 <div>
   <strong>Form Value:</strong>
