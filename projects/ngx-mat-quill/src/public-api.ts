@@ -4,3 +4,4 @@
 
 export * from './lib/ngx-mat-quill';
 export * from './lib/mat-quill-form-field-control.directive';
+export * from './lib/ngx-mat-quill-form-field';

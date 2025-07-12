@@ -1,4 +1,6 @@
-#
+# ngx-mat-quill
+
+> Quill editor for angular using material theming.
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.0.
 
@@ -60,6 +62,8 @@ For more information on using the Angular CLI, including detailed command refere
 
 ## To-Do
 
+- [ ] Validation in quill
+- [ ] JSON output
 - [ ] Disable tab in quill
 - [ ] Set normal fonts
 - [ ] Use Material icons
@@ -69,3 +73,4 @@ For more information on using the Angular CLI, including detailed command refere
 - [ ] Unit tests
 - [ ] E2e tests
 - [ ] Increase coverage
+- [ ] A11y improvements

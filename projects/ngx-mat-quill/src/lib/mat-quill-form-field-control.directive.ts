@@ -100,6 +100,12 @@ export class MatQuillFormFieldControlDirective
     this.quill.stateChanges.subscribe(() => {
       this.stateChanges.next();
     });
+
+    // Listen to focus state changes from the Quill component
+    this.quill.stateChanges.subscribe(() => {
+      this.focused = this.quill.focused;
+      this.stateChanges.next();
+    });
   }
 
   ngOnDestroy() {
@@ -107,8 +113,10 @@ export class MatQuillFormFieldControlDirective
   }
 
   ngDoCheck() {
-    // Sync focus state
-    this.focused = this.elRef.nativeElement.contains(document.activeElement);
+    // Only sync focus state if not already focused by the component
+    if (!this.quill.focused) {
+      this.focused = this.elRef.nativeElement.contains(document.activeElement);
+    }
   }
 
   setDescribedByIds(ids: string[]): void {
@@ -116,6 +124,7 @@ export class MatQuillFormFieldControlDirective
   }
 
   onContainerClick(_event: MouseEvent): void {
+    // Focus the Quill editor when the container is clicked
     this.quill.focus();
   }
 }
