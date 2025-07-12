@@ -1,4 +1,10 @@
-import { Component, Input, OnDestroy, forwardRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnDestroy,
+  forwardRef,
+  ViewChild,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { QuillModule, QuillEditorComponent } from 'ngx-quill';
@@ -20,6 +26,17 @@ import { QuillModule, QuillEditorComponent } from 'ngx-quill';
       class="mat-quill-editor"
     />
   `,
+  styles: [
+    `
+      :host {
+        display: block;
+        width: 100%;
+      }
+      quill-editor {
+        display: block;
+      }
+    `,
+  ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
