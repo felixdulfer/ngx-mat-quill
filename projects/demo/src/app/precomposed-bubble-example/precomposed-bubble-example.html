@@ -1,0 +1,29 @@
+<div class="example-container">
+  <div class="example-header">
+    <button mat-button routerLink="/" class="back-button">
+      ← Back to Examples
+    </button>
+    <h2>Pre-composed Form Field (Bubble Theme)</h2>
+  </div>
+
+  <mat-tab-group>
+    <mat-tab label="Demo">
+      <div class="demo-section">
+        <ngx-mat-quill-form-field
+          label="Rich Text (Bubble)"
+          placeholder="Type here..."
+          theme="bubble"
+          appearance="outline"
+        />
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Source Code">
+      <app-source-code-display
+        title="Pre-composed Bubble Example"
+        [htmlCode]="htmlCode"
+        [typescriptCode]="typescriptCode"
+      />
+    </mat-tab>
+  </mat-tab-group>
+</div>

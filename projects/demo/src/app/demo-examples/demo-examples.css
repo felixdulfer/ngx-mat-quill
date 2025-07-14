@@ -1,0 +1,22 @@
+.demo-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.demo-container h1 {
+  color: #1976d2;
+  margin-bottom: 8px;
+}
+
+.demo-container p {
+  color: #666;
+  margin-bottom: 32px;
+  font-size: 16px;
+}
+
+.examples-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}

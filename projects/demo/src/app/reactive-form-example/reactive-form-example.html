@@ -1,0 +1,38 @@
+<div class="example-container">
+  <div class="example-header">
+    <button mat-button routerLink="/" class="back-button">
+      ← Back to Examples
+    </button>
+    <h2>Reactive Form Example (with Material)</h2>
+  </div>
+
+  <mat-tab-group>
+    <mat-tab label="Demo">
+      <div class="demo-section">
+        <form [formGroup]="form">
+          <mat-form-field appearance="outline" class="mat-quill-form-field">
+            <ngx-mat-quill
+              ngxMatQuillFormFieldControl
+              formControlName="editor"
+              placeholder="Type here..."
+              theme="snow"
+            />
+            <mat-label>Reactive Rich Text</mat-label>
+          </mat-form-field>
+        </form>
+        <div>
+          <strong>Form Value:</strong>
+          <pre>{{ form.value | json }}</pre>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Source Code">
+      <app-source-code-display
+        title="Reactive Form Example"
+        [htmlCode]="htmlCode"
+        [typescriptCode]="typescriptCode"
+      />
+    </mat-tab>
+  </mat-tab-group>
+</div>

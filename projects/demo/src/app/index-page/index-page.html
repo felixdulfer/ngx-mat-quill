@@ -1,0 +1,36 @@
+<div class="index-container">
+  <div class="header">
+    <h1>ngx-mat-quill Examples</h1>
+    <p>
+      Explore different ways to use the ngx-mat-quill library with Angular
+      Material.
+    </p>
+  </div>
+
+  <div class="examples-grid">
+    @for (categoryGroup of getExamplesByCategory(); track categoryGroup[0]) {
+    <div class="category-section">
+      <h2>{{ categoryGroup[0] }}</h2>
+      <div class="examples-list">
+        @for (example of categoryGroup[1]; track example.route) {
+        <mat-card class="example-card">
+          <mat-card-header>
+            <mat-card-title>{{ example.title }}</mat-card-title>
+            <mat-card-subtitle>{{ example.description }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-actions>
+            <button
+              mat-raised-button
+              color="primary"
+              [routerLink]="example.route"
+            >
+              View Example
+            </button>
+          </mat-card-actions>
+        </mat-card>
+        }
+      </div>
+    </div>
+    }
+  </div>
+</div>

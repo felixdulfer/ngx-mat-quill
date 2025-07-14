@@ -1,0 +1,27 @@
+.example-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.example-header {
+  margin-bottom: 24px;
+}
+
+.back-button {
+  margin-bottom: 16px;
+  color: #1976d2;
+}
+
+.example-container h2 {
+  color: #1976d2;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.demo-section {
+  background-color: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
