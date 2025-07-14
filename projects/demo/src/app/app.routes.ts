@@ -56,6 +56,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'reactive-form-bubble',
+    loadComponent: () =>
+      import(
+        './reactive-form-bubble-example/reactive-form-bubble-example'
+      ).then((m) => m.ReactiveFormBubbleExampleComponent),
+  },
+  {
     path: 'reactive-form-precomposed',
     loadComponent: () =>
       import(

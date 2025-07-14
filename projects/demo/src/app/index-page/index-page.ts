@@ -57,6 +57,13 @@ export class IndexPageComponent {
       category: 'Reactive Forms',
     },
     {
+      title: 'Reactive Form Example (Bubble Theme)',
+      description:
+        'Quill editor with bubble theme integrated with reactive forms',
+      route: '/reactive-form-bubble',
+      category: 'Reactive Forms',
+    },
+    {
       title: 'Reactive Form Example (Pre-composed)',
       description: 'Pre-composed component with reactive forms',
       route: '/reactive-form-precomposed',
