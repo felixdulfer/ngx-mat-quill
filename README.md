@@ -1,79 +1,212 @@
 # ngx-mat-quill
 
-> Quill editor for angular using material theming.
+A rich text editor component for Angular Material that integrates Quill.js with Angular Material form fields.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.0.
+## Features
 
-## Development server
+- 🎨 **Multiple Themes**: Support for both Snow and Bubble themes
+- 🔧 **Material Integration**: Seamless integration with Angular Material form fields
+- 📝 **Reactive Forms**: Full support for Angular reactive forms
+- 🎯 **Pre-composed Components**: Ready-to-use form field components
+- ♿ **Accessibility**: Proper Material Design accessibility features
+- 🎨 **Customizable**: Easy to customize and extend
 
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Installation
 
 ```bash
-ng generate component component-name
+npm install @felixdulfer/ngx-mat-quill
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Quick Start
+
+```typescript
+import { NgxMatQuill } from "@felixdulfer/ngx-mat-quill";
+
+@Component({
+  selector: "app-example",
+  standalone: true,
+  imports: [NgxMatQuill],
+  template: ` <ngx-mat-quill placeholder="Type here..." theme="snow" /> `,
+})
+export class ExampleComponent {}
+```
+
+## Usage Examples
+
+### Basic Usage
+
+```typescript
+import { NgxMatQuill } from '@felixdulfer/ngx-mat-quill';
+
+// Snow theme (default)
+<ngx-mat-quill placeholder="Type here..." theme="snow" />
+
+// Bubble theme
+<ngx-mat-quill placeholder="Type here..." theme="bubble" />
+```
+
+### Material Integration
+
+```typescript
+import { NgxMatQuill, MatQuillFormFieldControlDirective } from "@felixdulfer/ngx-mat-quill";
+import { MatFormFieldModule } from "@angular/material/form-field";
+
+@Component({
+  imports: [NgxMatQuill, MatQuillFormFieldControlDirective, MatFormFieldModule],
+  template: `
+    <mat-form-field appearance="outline">
+      <ngx-mat-quill ngxMatQuillFormFieldControl placeholder="Type here..." theme="snow" />
+      <mat-label>Rich Text Editor</mat-label>
+    </mat-form-field>
+  `,
+})
+export class ExampleComponent {}
+```
+
+### Pre-composed Component
+
+```typescript
+import { NgxMatQuillFormField } from "@felixdulfer/ngx-mat-quill";
+
+@Component({
+  imports: [NgxMatQuillFormField],
+  template: ` <ngx-mat-quill-form-field label="Rich Text Editor" placeholder="Type here..." theme="snow" appearance="outline" /> `,
+})
+export class ExampleComponent {}
+```
+
+### Reactive Forms
+
+```typescript
+import { NgxMatQuill, MatQuillFormFieldControlDirective } from "@felixdulfer/ngx-mat-quill";
+import { ReactiveFormsModule, FormGroup, FormControl } from "@angular/forms";
+
+@Component({
+  imports: [NgxMatQuill, MatQuillFormFieldControlDirective, ReactiveFormsModule],
+  template: `
+    <form [formGroup]="form">
+      <mat-form-field appearance="outline">
+        <ngx-mat-quill ngxMatQuillFormFieldControl formControlName="editor" placeholder="Type here..." theme="snow" />
+        <mat-label>Rich Text Editor</mat-label>
+      </mat-form-field>
+    </form>
+  `,
+})
+export class ExampleComponent {
+  form = new FormGroup({
+    editor: new FormControl("Initial value"),
+  });
+}
+```
+
+## Development
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- Angular CLI
+- Conventional Changelog tools
+
+### Setup
 
 ```bash
-ng generate --help
+# Install dependencies
+npm install
+
+# Install conventional changelog tools globally
+npm install -g conventional-recommended-bump conventional-changelog
+
+# Serve the demo app
+npm start
 ```
 
-## Building
-
-To build the project run:
+### Building
 
 ```bash
-ng build
+# Build the library
+ng build ngx-mat-quill
+
+# Build the demo app
+ng build demo
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Deployment
 
-## Running unit tests
+The project includes an automated deployment script that handles version bumping, building, and publishing to npm.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Prerequisites
+
+1. **NPM Login**: Make sure you're logged in to npm
+
+   ```bash
+   npm login
+   ```
+
+2. **Conventional Changelog Tools**: Install the required tools globally
+
+   ```bash
+   npm install -g conventional-recommended-bump conventional-changelog
+   ```
+
+3. **Git Setup**: Ensure you're on the main branch with a clean working directory
+
+### Deploy
 
 ```bash
-ng test
+# Run the deployment script
+npm run deploy
 ```
 
-## Running end-to-end tests
+The deploy script will:
 
-For end-to-end (e2e) testing, run:
+1. ✅ **Check prerequisites** (main branch, clean working directory, npm login)
+2. 📊 **Determine version bump** using conventional-recommended-bump with Angular preset
+3. 📝 **Update version** in package.json
+4. 🔨 **Build the library** using Angular CLI
+5. 📦 **Publish to npm** under `@felixdulfer/ngx-mat-quill`
+6. 🏷️ **Create git tag** with the new version
+7. 📤 **Push changes and tags** to the repository
+
+### Manual Deployment
+
+If you prefer to deploy manually:
 
 ```bash
-ng e2e
+# 1. Bump version (patch, minor, or major)
+npm version patch|minor|major
+
+# 2. Build the library
+ng build ngx-mat-quill
+
+# 3. Navigate to dist and publish
+cd dist/ngx-mat-quill
+npm publish --access public
+
+# 4. Push tags
+git push --tags
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Contributing
 
-## Additional Resources
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Commit using conventional commit format
+6. Push and create a pull request
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Commit Convention
 
-## To-Do
+This project follows the [Conventional Commits](https://www.conventionalcommits.org/) specification:
 
-- [ ] Validation in quill
-- [ ] JSON output
-- [ ] Set normal fonts
-- [ ] Use Material icons
-- [ ] Deploy to npm
-- [ ] ESLint
-- [ ] Prettier
-- [ ] Unit tests
-- [ ] E2e tests
-- [ ] Increase coverage
-- [ ] A11y improvements
+- `feat:` New features
+- `fix:` Bug fixes
+- `docs:` Documentation changes
+- `style:` Code style changes (formatting, etc.)
+- `refactor:` Code refactoring
+- `test:` Adding or updating tests
+- `chore:` Maintenance tasks
 
-- [ ] Demo where quill is used as a form control
-  - [ ] Navigate from/to other fields using tab
-  - [ ] Prevent focus on toolbar (tab over)
+## License
+
+MIT License - see LICENSE file for details.
