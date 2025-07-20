@@ -4,6 +4,9 @@ import {
   OnDestroy,
   forwardRef,
   ViewChild,
+  AfterViewInit,
+  ViewEncapsulation,
+  OnInit,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
@@ -20,6 +23,7 @@ import { QuillModule, QuillEditorComponent } from 'ngx-quill';
       [readOnly]="disabled"
       [required]="required"
       [theme]="theme"
+      format="object"
       (onContentChanged)="onContentChanged($event)"
       (onBlur)="onBlur()"
       (onFocus)="onFocus()"
@@ -53,7 +57,7 @@ import { QuillModule, QuillEditorComponent } from 'ngx-quill';
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class NgxMatQuill implements ControlValueAccessor, OnDestroy {
+export class NgxMatQuill implements ControlValueAccessor, OnDestroy, AfterViewInit, OnInit {
   @ViewChild('quill', { static: false }) quillEditor?: QuillEditorComponent;
 
   stateChanges = new Subject<void>();
@@ -65,13 +69,16 @@ export class NgxMatQuill implements ControlValueAccessor, OnDestroy {
   @Input() required = false;
   @Input() disabled = false;
 
-  private _value = '';
+  private _value: any = null;
+  private _pendingValue: any = null;
+  editorContent: any = null;
 
-  get value(): string {
+  get value(): any {
     return this._value;
   }
-  set value(val: string) {
+  set value(val: any) {
     this._value = val;
+    this.editorContent = val;
     this.stateChanges.next();
     this.onChange(val);
   }
@@ -83,9 +90,82 @@ export class NgxMatQuill implements ControlValueAccessor, OnDestroy {
     this.stateChanges.next();
   };
 
-  writeValue(val: string): void {
+  ngOnInit() {
+    // Don't initialize with empty Delta - let Quill handle it
+    // This was causing the ParchmentError
+  }
+
+  ngAfterViewInit() {
+    // Use a longer timeout to ensure Quill is fully initialized
+    setTimeout(() => {
+      // If there's a pending value, set it now that the editor is available
+      if (this._pendingValue !== null) {
+        this.setQuillContent(this._pendingValue);
+        this._pendingValue = null;
+      } else if (this._value) {
+        // If there's an initial value, set it
+        this.setQuillContent(this._value);
+      }
+    }, 100); // Increased timeout to ensure Quill is ready
+  }
+
+  writeValue(val: any): void {
     this._value = val;
     this.stateChanges.next();
+    
+    // If the editor is available, set the content immediately
+    if (this.quillEditor) {
+      this.setQuillContent(val);
+    } else {
+      // Store the value to set it when the editor becomes available
+      this._pendingValue = val;
+    }
+  }
+
+  private setQuillContent(content: any): void {
+    console.log('setQuillContent called with:', content);
+    if (this.quillEditor) {
+      console.log('Quill editor is available');
+      try {
+        // Try to set content via ngx-quill's API
+        if (typeof this.quillEditor['writeValue'] === 'function') {
+          console.log('Using ngx-quill writeValue API');
+          this.quillEditor['writeValue'](content);
+          return;
+        }
+        
+        // Fallback: set innerHTML directly
+        if (this.quillEditor['editorElem']) {
+          console.log('Using innerHTML fallback');
+          const editor = this.quillEditor['editorElem'];
+          if (content && content.ops && content.ops.length > 0) {
+            // Convert Delta to HTML for display
+            let html = '';
+            content.ops.forEach((op: any) => {
+              if (op.insert) {
+                if (typeof op.insert === 'string') {
+                  if (op.insert === '\n') {
+                    html += '<br>';
+                  } else {
+                    html += op.insert;
+                  }
+                }
+              }
+            });
+            console.log('Setting innerHTML to:', html);
+            editor.innerHTML = html || '<p><br></p>';
+          } else {
+            editor.innerHTML = '<p><br></p>';
+          }
+        } else {
+          console.log('No editorElem available');
+        }
+      } catch (error) {
+        console.error('Error setting Quill content:', error);
+      }
+    } else {
+      console.log('Quill editor not available');
+    }
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -104,7 +184,13 @@ export class NgxMatQuill implements ControlValueAccessor, OnDestroy {
   }
 
   onContentChanged(event: any) {
-    this.value = event.html;
+    console.log('onContentChanged event:', event);
+    // The event should now contain the Delta format as an object
+    this._value = event.content;
+    this.editorContent = event.content;
+    console.log('Updated _value and editorContent to:', event.content);
+    this.onChange(event.content);
+    this.stateChanges.next(); // Trigger state change for form field label
   }
 
   onFocus() {

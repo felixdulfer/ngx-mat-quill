@@ -10,6 +10,7 @@ A rich text editor component for Angular Material that integrates Quill.js with 
 - 🎯 **Pre-composed Components**: Ready-to-use form field components
 - ♿ **Accessibility**: Proper Material Design accessibility features
 - 🎨 **Customizable**: Easy to customize and extend
+- 📊 **Delta Format**: Uses Quill's Delta format (JSON) for better data handling
 
 ## Installation
 
@@ -75,7 +76,9 @@ import { NgxMatQuillFormField } from "@felixdulfer/ngx-mat-quill";
 export class ExampleComponent {}
 ```
 
-### Reactive Forms
+### Reactive Forms with Delta Format
+
+The component uses Quill's Delta format (JSON) for better data handling and formatting preservation:
 
 ```typescript
 import { NgxMatQuill, MatQuillFormFieldControlDirective } from "@felixdulfer/ngx-mat-quill";
@@ -94,9 +97,48 @@ import { ReactiveFormsModule, FormGroup, FormControl } from "@angular/forms";
 })
 export class ExampleComponent {
   form = new FormGroup({
-    editor: new FormControl("Initial value"),
+    editor: new FormControl({
+      ops: [
+        { insert: "Initial value\n" }
+      ]
+    }),
   });
 }
+```
+
+### Delta Format Examples
+
+The component accepts and returns data in Quill's Delta format:
+
+```typescript
+// Simple text (note the newline at the end)
+const simpleText = {
+  ops: [
+    { insert: "Hello, World!\n" }
+  ]
+};
+
+// Formatted text
+const formattedText = {
+  ops: [
+    { insert: "Bold text", attributes: { bold: true } },
+    { insert: "\n" },
+    { insert: "Italic text", attributes: { italic: true } },
+    { insert: "\n" }
+  ]
+};
+
+// Mixed content
+const mixedContent = {
+  ops: [
+    { insert: "Normal text" },
+    { insert: "\n" },
+    { insert: "Bold and ", attributes: { bold: true } },
+    { insert: "italic", attributes: { bold: true, italic: true } },
+    { insert: " text", attributes: { bold: true } },
+    { insert: "\n" }
+  ]
+};
 ```
 
 ## Development

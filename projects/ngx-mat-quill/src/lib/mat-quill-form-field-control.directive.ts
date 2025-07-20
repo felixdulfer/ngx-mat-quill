@@ -25,7 +25,7 @@ let nextUniqueId = 0;
   ],
 })
 export class MatQuillFormFieldControlDirective
-  implements MatFormFieldControl<string>, OnDestroy, DoCheck, OnInit
+  implements MatFormFieldControl<any>, OnDestroy, DoCheck, OnInit
 {
   private elRef = inject(ElementRef);
   public ngControl = inject(NgControl, { optional: true, self: true });
@@ -38,16 +38,47 @@ export class MatQuillFormFieldControlDirective
   @HostBinding() id = `mat-quill-editor-${nextUniqueId++}`;
   describedBy = '';
 
-  get value(): string {
+  get value(): any {
     return this.quill.value;
   }
-  set value(val: string) {
+  set value(val: any) {
     this.quill.value = val;
     this.stateChanges.next();
   }
 
   get empty() {
-    return !this.value || this.value.length === 0;
+    if (!this.value) {
+      return true;
+    }
+    
+    if (typeof this.value === 'object' && this.value.ops) {
+      // Check if there's actual content in the Delta
+      let hasContent = false;
+      
+      for (const op of this.value.ops) {
+        if (op.insert) {
+          if (typeof op.insert === 'string') {
+            // Check if this operation contains actual text content
+            const text = op.insert;
+            // Remove newlines and check if there's actual text
+            const textWithoutNewlines = text.replace(/\n/g, '');
+            if (textWithoutNewlines.trim() !== '') {
+              hasContent = true;
+              break;
+            }
+          }
+        }
+      }
+      
+      return !hasContent;
+    }
+    
+    // For string values, check if it's empty or just whitespace
+    if (typeof this.value === 'string') {
+      return this.value.trim() === '';
+    }
+    
+    return false;
   }
 
   get errorState() {
@@ -96,12 +127,7 @@ export class MatQuillFormFieldControlDirective
   }
 
   ngOnInit() {
-    // Listen to focus/blur from the Quill component
-    this.quill.stateChanges.subscribe(() => {
-      this.stateChanges.next();
-    });
-
-    // Listen to focus state changes from the Quill component
+    // Listen to state changes from the Quill component
     this.quill.stateChanges.subscribe(() => {
       this.focused = this.quill.focused;
       this.stateChanges.next();

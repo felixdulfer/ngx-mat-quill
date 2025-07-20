@@ -27,7 +27,11 @@ import { SourceCodeDisplayComponent } from '../source-code-display/source-code-d
 })
 export class ReactiveFormBubbleExampleComponent {
   form = new FormGroup({
-    editor: new FormControl('This is the initial value!'),
+    editor: new FormControl({
+      ops: [
+        { insert: 'This is the initial value!\n' }
+      ]
+    }),
   });
 
   htmlCode = `<form [formGroup]="form">
@@ -81,7 +85,11 @@ import { JsonPipe } from '@angular/common';
 })
 export class ExampleComponent {
   form = new FormGroup({
-    editor: new FormControl('This is the initial value!'),
+    editor: new FormControl({
+      ops: [
+        { insert: 'This is the initial value!\n' }
+      ]
+    }),
   });
 }`;
 }

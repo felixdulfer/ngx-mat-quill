@@ -52,7 +52,7 @@ export class NgxMatQuillFormField implements ControlValueAccessor {
   onChange = (_: any) => {};
   onTouched = () => {};
 
-  writeValue(val: string): void {
+  writeValue(val: any): void {
     if (this.quillComponent) {
       this.quillComponent.writeValue(val);
     }
