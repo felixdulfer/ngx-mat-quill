@@ -19,7 +19,7 @@ import { SourceCodeDisplayComponent } from '../source-code-display/source-code-d
   styleUrl: './basic-snow-example.css',
 })
 export class BasicSnowExampleComponent {
-  htmlCode = `<ngx-mat-quill placeholder="Type here..." theme="snow" />`;
+  htmlCode = `<ngx-mat-quill theme="snow" />`;
 
   typescriptCode = `import { NgxMatQuill } from 'ngx-mat-quill';
 
@@ -28,7 +28,7 @@ export class BasicSnowExampleComponent {
   standalone: true,
   imports: [NgxMatQuill],
   template: \`
-    <ngx-mat-quill placeholder="Type here..." theme="snow" />
+    <ngx-mat-quill theme="snow" />
   \`
 })
 export class ExampleComponent {}`;

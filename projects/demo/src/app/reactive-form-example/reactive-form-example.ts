@@ -39,7 +39,6 @@ export class ReactiveFormExampleComponent {
     <ngx-mat-quill
       ngxMatQuillFormFieldControl
       formControlName="editor"
-      placeholder="Type here..."
       theme="snow"
     />
     <mat-label>Reactive Rich Text</mat-label>
@@ -71,7 +70,6 @@ import { JsonPipe } from '@angular/common';
         <ngx-mat-quill
           ngxMatQuillFormFieldControl
           formControlName="editor"
-          placeholder="Type here..."
           theme="snow"
         />
         <mat-label>Reactive Rich Text</mat-label>

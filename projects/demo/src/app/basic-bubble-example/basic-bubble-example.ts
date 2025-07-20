@@ -19,7 +19,7 @@ import { SourceCodeDisplayComponent } from '../source-code-display/source-code-d
   styleUrl: './basic-bubble-example.css',
 })
 export class BasicBubbleExampleComponent {
-  htmlCode = `<ngx-mat-quill placeholder="Type here..." theme="bubble" />`;
+  htmlCode = `<ngx-mat-quill theme="bubble" />`;
 
   typescriptCode = `import { NgxMatQuill } from 'ngx-mat-quill';
 
@@ -28,7 +28,7 @@ export class BasicBubbleExampleComponent {
   standalone: true,
   imports: [NgxMatQuill],
   template: \`
-    <ngx-mat-quill placeholder="Type here..." theme="bubble" />
+    <ngx-mat-quill theme="bubble" />
   \`
 })
 export class ExampleComponent {}`;

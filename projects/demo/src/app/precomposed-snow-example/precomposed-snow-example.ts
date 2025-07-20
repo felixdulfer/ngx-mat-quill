@@ -21,7 +21,6 @@ import { SourceCodeDisplayComponent } from '../source-code-display/source-code-d
 export class PrecomposedSnowExampleComponent {
   htmlCode = `<ngx-mat-quill-form-field
   label="Rich Text (Pre-composed)"
-  placeholder="Type here..."
   theme="snow"
   appearance="outline"
 />`;
@@ -35,7 +34,6 @@ export class PrecomposedSnowExampleComponent {
   template: \`
     <ngx-mat-quill-form-field
       label="Rich Text (Pre-composed)"
-      placeholder="Type here..."
       theme="snow"
       appearance="outline"
     />

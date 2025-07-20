@@ -34,7 +34,6 @@ export class ReactiveFormPrecomposedExampleComponent {
   htmlCode = `<form [formGroup]="form">
   <ngx-mat-quill-form-field
     label="Reactive Rich Text (Pre-composed)"
-    placeholder="Type here..."
     theme="snow"
     appearance="outline"
     formControlName="editor"
@@ -61,7 +60,6 @@ import { JsonPipe } from '@angular/common';
     <form [formGroup]="form">
       <ngx-mat-quill-form-field
         label="Reactive Rich Text (Pre-composed)"
-        placeholder="Type here..."
         theme="snow"
         appearance="outline"
         formControlName="editor"

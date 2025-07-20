@@ -25,7 +25,6 @@ export class MaterialBubbleExampleComponent {
   htmlCode = `<mat-form-field appearance="outline" class="mat-quill-form-field">
   <ngx-mat-quill
     ngxMatQuillFormFieldControl
-    placeholder="Type here..."
     theme="bubble"
   />
   <mat-label>Rich Text (Bubble Theme)</mat-label>
@@ -42,7 +41,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     <mat-form-field appearance="outline" class="mat-quill-form-field">
       <ngx-mat-quill
         ngxMatQuillFormFieldControl
-        placeholder="Type here..."
         theme="bubble"
       />
       <mat-label>Rich Text (Bubble Theme)</mat-label>

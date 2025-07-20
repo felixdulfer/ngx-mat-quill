@@ -21,7 +21,6 @@ import { SourceCodeDisplayComponent } from '../source-code-display/source-code-d
 export class PrecomposedBubbleExampleComponent {
   htmlCode = `<ngx-mat-quill-form-field
   label="Rich Text (Bubble)"
-  placeholder="Type here..."
   theme="bubble"
   appearance="fill"
 />`;
@@ -35,7 +34,6 @@ export class PrecomposedBubbleExampleComponent {
   template: \`
     <ngx-mat-quill-form-field
       label="Rich Text (Bubble)"
-      placeholder="Type here..."
       theme="bubble"
       appearance="fill"
     />
