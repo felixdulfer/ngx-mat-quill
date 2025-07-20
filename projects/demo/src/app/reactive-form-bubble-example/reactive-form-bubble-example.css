@@ -25,3 +25,7 @@
   padding: 24px;
   margin-bottom: 24px;
 }
+
+.mat-quill-form-field {
+  width: 100%;
+}
