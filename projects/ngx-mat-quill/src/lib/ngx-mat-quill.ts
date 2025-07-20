@@ -32,19 +32,32 @@ import { QuillModule, QuillEditorComponent } from 'ngx-quill';
   `,
   styles: [
     `
+      mat-form-field quill-editor {
+        display: block !important;
+      }
+      ngx-mat-quill {
+        display: block;
+        height: 100%;
+      }
       quill-editor {
         display: block;
+        height: 100%;
       }
       .mat-quill-editor {
         display: block;
         width: 100%;
       }
-      .mat-quill-editor .ql-editor {
+      mat-form-field .ql-container .ql-editor {
         padding: 0;
         margin: 0;
       }
+      mat-form-field .ql-tooltip {
+        z-index: 9999;
+        transform: translateY(2rem) !important;
+      }
     `,
   ],
+  styleUrls: ['./quill.bubble.custom.css'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -52,12 +65,11 @@ import { QuillModule, QuillEditorComponent } from 'ngx-quill';
       multi: true,
     },
   ],
-  host: {
-    class: 'mat-quill-editor',
-  },
   encapsulation: ViewEncapsulation.None,
 })
-export class NgxMatQuill implements ControlValueAccessor, OnDestroy, AfterViewInit, OnInit {
+export class NgxMatQuill
+  implements ControlValueAccessor, OnDestroy, AfterViewInit, OnInit
+{
   @ViewChild('quill', { static: false }) quillEditor?: QuillEditorComponent;
 
   stateChanges = new Subject<void>();
@@ -112,7 +124,7 @@ export class NgxMatQuill implements ControlValueAccessor, OnDestroy, AfterViewIn
   writeValue(val: any): void {
     this._value = val;
     this.stateChanges.next();
-    
+
     // If the editor is available, set the content immediately
     if (this.quillEditor) {
       this.setQuillContent(val);
@@ -133,7 +145,7 @@ export class NgxMatQuill implements ControlValueAccessor, OnDestroy, AfterViewIn
           this.quillEditor['writeValue'](content);
           return;
         }
-        
+
         // Fallback: set innerHTML directly
         if (this.quillEditor['editorElem']) {
           console.log('Using innerHTML fallback');
@@ -206,10 +218,25 @@ export class NgxMatQuill implements ControlValueAccessor, OnDestroy, AfterViewIn
   }
 
   focus() {
+    console.log('focus() method called');
     this.focused = true;
     this.stateChanges.next();
-    if (this.quillEditor && this.quillEditor['editorElem']) {
-      (this.quillEditor['editorElem'] as HTMLElement).focus();
+
+    if (this.quillEditor) {
+      console.log('Quill editor available, attempting to focus');
+      try {
+        // Try to focus the editor element
+        if (this.quillEditor['editorElem']) {
+          console.log('Focusing editorElem');
+          (this.quillEditor['editorElem'] as HTMLElement).focus();
+        } else {
+          console.log('No focusable element found');
+        }
+      } catch (error) {
+        console.error('Error focusing Quill editor:', error);
+      }
+    } else {
+      console.log('Quill editor not available for focus');
     }
   }
 

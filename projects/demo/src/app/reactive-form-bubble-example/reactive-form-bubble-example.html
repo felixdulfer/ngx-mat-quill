@@ -10,15 +10,26 @@
     <mat-tab label="Demo">
       <div class="demo-section">
         <form [formGroup]="form">
-          <mat-form-field appearance="outline" class="mat-quill-form-field">
-            <ngx-mat-quill
-              ngxMatQuillFormFieldControl
-              formControlName="editor"
-              theme="bubble"
-            />
-            <mat-label>Reactive Rich Text (Bubble Theme)</mat-label>
-          </mat-form-field>
+          <div>
+            <mat-form-field appearance="outline" class="mat-quill-form-field">
+              <ngx-mat-quill
+                ngxMatQuillFormFieldControl
+                formControlName="editor"
+                theme="bubble"
+              />
+              <mat-label>Reactive Rich Text (Bubble Theme)</mat-label>
+              <mat-hint>Select the text to see the toolbar</mat-hint>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="mat-quill-form-field">
+              <input matInput value="This is the initial value!" />
+              <mat-label>Reactive Rich Text (Bubble Theme)</mat-label>
+              <mat-hint>This is just a regular input field for comparison</mat-hint>
+            </mat-form-field>
+          </div>
         </form>
+        <br />
         <div>
           <strong>Form Value:</strong>
           <pre>{{ form.value | json }}</pre>

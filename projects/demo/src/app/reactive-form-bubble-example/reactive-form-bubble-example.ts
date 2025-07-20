@@ -7,6 +7,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { SourceCodeDisplayComponent } from '../source-code-display/source-code-display';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-reactive-form-bubble-example',
@@ -21,6 +22,7 @@ import { SourceCodeDisplayComponent } from '../source-code-display/source-code-d
     MatButtonModule,
     RouterModule,
     SourceCodeDisplayComponent,
+    MatInputModule,
   ],
   templateUrl: './reactive-form-bubble-example.html',
   styleUrl: './reactive-form-bubble-example.css',

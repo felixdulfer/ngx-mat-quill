@@ -29,3 +29,12 @@
 .mat-quill-form-field {
   width: 100%;
 }
+
+form {
+  display: flex;
+  gap: 16px;
+}
+
+form > div {
+  flex: 1;
+}

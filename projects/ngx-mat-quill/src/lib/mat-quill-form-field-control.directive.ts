@@ -150,6 +150,7 @@ export class MatQuillFormFieldControlDirective
   }
 
   onContainerClick(_event: MouseEvent): void {
+    console.log('onContainerClick called');
     // Focus the Quill editor when the container is clicked
     this.quill.focus();
   }
