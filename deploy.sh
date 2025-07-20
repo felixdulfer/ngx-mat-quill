@@ -35,6 +35,13 @@ if ! command -v conventional-changelog &>/dev/null; then
   exit 1
 fi
 
+# Check if conventional-changelog-angular is installed (locally or globally)
+if ! npm list -g conventional-changelog-angular &>/dev/null; then
+  echo "❌ Error: conventional-changelog-angular is not installed"
+  echo "Please install it with: npm install -g conventional-changelog-angular"
+  exit 1
+fi
+
 # Get the recommended version bump
 echo "📊 Determining version bump..."
 BUMP_TYPE=$(conventional-recommended-bump -p angular)
