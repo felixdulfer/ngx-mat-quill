@@ -28,12 +28,16 @@ import { QuillModule, QuillEditorComponent } from 'ngx-quill';
   `,
   styles: [
     `
-      :host {
+      quill-editor {
+        display: block;
+      }
+      .mat-quill-editor {
         display: block;
         width: 100%;
       }
-      quill-editor {
-        display: block;
+      .mat-quill-editor .ql-editor {
+        padding: 0;
+        margin: 0;
       }
     `,
   ],
@@ -44,6 +48,10 @@ import { QuillModule, QuillEditorComponent } from 'ngx-quill';
       multi: true,
     },
   ],
+  host: {
+    class: 'mat-quill-editor',
+  },
+  encapsulation: ViewEncapsulation.None,
 })
 export class NgxMatQuill implements ControlValueAccessor, OnDestroy {
   @ViewChild('quill', { static: false }) quillEditor?: QuillEditorComponent;
